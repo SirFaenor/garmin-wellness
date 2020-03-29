@@ -1,5 +1,5 @@
 {
-  "name": "techgyani/garmin-wellness",
+  "name": "sirfaenor/garminhealth-oauth",
   "description" : "Unofficial Oauth 1.0 adapter for garmin-wellness API",
   "license": "MIT",
   "require": {
@@ -8,7 +8,7 @@
   },
   "autoload": {
     "psr-4": {
-      "techgyani\\OAuth1\\Client\\Server\\": "src/"
+      "SirFaenor\\OAuth1\\Client\\Server\\": "src/"
     }
   }
 }

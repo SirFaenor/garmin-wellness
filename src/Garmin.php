@@ -1,5 +1,5 @@
 <?php
-namespace techgyani\OAuth1\Client\Server;
+namespace SirFaenor\OAuth1\Client\Server;
 
 use League\Oauth1\Client\Credentials\TokenCredentials;
 use League\OAuth1\Client\Server\Server;

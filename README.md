@@ -5,15 +5,15 @@ This package provides a Garmin API Client for the PHP League's [OAuth 1.0 Client
 ## Installation
 
 ```
-composer require techgyani/garmin-wellness
+composer require SirFaenor/garmin-wellness
 ```
 
 ## Usage
 
-Usage is the same as The League's OAuth client, using `techgyani\OAuth1\Client\Server\Garmin` as the provider.
+Usage is the same as The League's OAuth client, using `SirFaenor\OAuth1\Client\Server\Garmin` as the provider.
 
 ```php
-$server = new techgyani\OAuth1\Client\Server\Garmin([
+$server = new SirFaenor\OAuth1\Client\Server\Garmin([
     'identifier'   => 'your-client-id',
     'secret'       => 'your-client-secret',
     'callback_uri' => 'http://callback.url/callback',
@@ -30,7 +30,7 @@ Below are the steps to test examples :
 
 setEnv consumerKey sddsadas
 setEnv consumerSecret fdsfdsfsd
-setEnv callback_uri http://localhost/garmin-wellness/vendor/techgyani/garmin-wellness/examples/garmin_callback.php
+setEnv callback_uri http://localhost/garmin-wellness/vendor/SirFaenor/garmin-wellness/examples/garmin_callback.php
 
 3. Now run examples/index.php in your browser. It should redirect you to the garmin server, where you need to login and authorize the application.
 4. Once authorization is done user will be redirected to examples/garmin_api_test.php. There you must see activity summary output if everything is okay.

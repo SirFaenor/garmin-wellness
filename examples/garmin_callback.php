@@ -5,7 +5,7 @@ if (session_status() == PHP_SESSION_NONE) {
 require_once __DIR__.'/../../../../vendor/autoload.php';
 
 if (isset($_GET['oauth_token']) && isset($_GET['oauth_verifier']) && isset($_SESSION['temporary_credentials'])) {
-    $server = new \techgyani\OAuth1\Client\Server\Garmin([
+    $server = new \SirFaenor\OAuth1\Client\Server\Garmin([
         'identifier' => getenv('consumerKey'),
         'secret' => getenv('consumerSecret'),
         'callback_uri' => getenv('callback_uri'),
