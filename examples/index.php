@@ -1,16 +1,45 @@
 <?php
+use League\OAuth1\Client\Credentials\TemporaryCredentials;
+
+/**
+ * bootstrap
+ */
 session_start();
 require_once __DIR__.'/../../../../vendor/autoload.php';
+$config = require_once __DIR__.'/config.php';
 
+
+/**
+ * This is the first step of the authorization process.
+ * Temporary credentials must be something like 
+ *  League\OAuth1\Client\Credentials\TemporaryCredentials {
+ *      #identifier: "cfb73f67-46e1-4bae-9a7f-4b0b6bdb6d32"
+ *      #secret: "0MPEOeJMWTTeePsT606sj4I0zUFP7kenRVi"
+ * }
+ */
 
 $server = new \SirFaenor\OAuth1\Client\Server\Garmin([
-    'identifier' => getenv('consumerKey'),
-    'secret' => getenv('consumerSecret'),
-    'callback_uri' => getenv('callback_uri')
+    'identifier' => $config["consumer_key"],
+    'secret' => $config["consumer_secret"],
+    'callback_uri' => $config["callback_uri"]
 ]);
-//1st part fetching temporary credentials
 $temporaryCredentials = $server->getTemporaryCredentials();
+//var_dump($temporaryCredentials);
+if (! $temporaryCredentials instanceof TemporaryCredentials) {
+    throw new Exception("Invalid response or credentials");
+}
 $_SESSION['temporary_credentials'] = serialize($temporaryCredentials);
-session_write_close();
-// Second part of OAuth 1.0 authentication is to redirect the resource owner to the login screen on the server.
-$server->authorize($temporaryCredentials);
+
+
+/**
+ * This is the second step of the auth flow.
+ * Redirect user to Garmin Connect oauthCOnfirm page.
+ */
+$authUrl = $server->getAuthorizationUrl($temporaryCredentials);
+?>
+
+<br>
+<pre>
+<?php var_dump($authUrl); ?>
+</pre>
+<a href="<?= $authUrl ?>">Click here to proceed with the authentication</a>

@@ -1,14 +1,19 @@
 <?php
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
+/**
+ * bootstrap
+ */
+session_start();
 require_once __DIR__.'/../../../../vendor/autoload.php';
+$config = require_once __DIR__.'/config.php';
 
 
+/**
+ * We can make an api request
+ */
 $server = new \SirFaenor\OAuth1\Client\Server\Garmin([
-    'identifier' => getenv('consumerKey'),
-    'secret' => getenv('consumerSecret'),
-    'callback_uri' => getenv('callback_uri'),
+    'identifier' => $config["consumer_key"],
+    'secret' => $config["consumer_secret"],
+    'callback_uri' => $config["callback_uri"]
 ]);
 
 
