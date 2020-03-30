@@ -131,7 +131,7 @@ class Garmin extends Server
     {
         $client = $this->createHttpClient();
         $query = http_build_query($params);
-        $query = '/activities?' . $query;
+        $query = 'activities?'.$query;
         $headers = $this->getHeaders($tokenCredentials, 'GET', self::USER_API_URL . $query);
         try {
             $response = $client->get(self::USER_API_URL . $query, [
@@ -146,7 +146,7 @@ class Garmin extends Server
                 "Received error [$body] with status code [$statusCode] when retrieving activity summary."
             );
         }
-        return $response->getBody()->getContents();
+        return json_decode($response->getBody()->getContents());
     }
 
     public function urlUserDetails()
@@ -157,8 +157,34 @@ class Garmin extends Server
     {
     }
 
+
+    /**
+     * Retrieves user id corresponding to an user token.
+     * This user id is the same across multiple authorizations of the application
+     * by the same user.
+     */
     public function userUid($data, TokenCredentials $tokenCredentials)
     {
+
+        $client = $this->createHttpClient();
+        $query = 'user/id';
+        $headers = $this->getHeaders($tokenCredentials, 'GET', self::USER_API_URL . $query);
+        try {
+            $response = $client->get(self::USER_API_URL . $query, [
+                'headers' => $headers
+            ]);
+        } catch (BadResponseException $e) {
+            $response = $e->getResponse();
+            $body = $response->getBody();
+            $statusCode = $response->getStatusCode();
+
+            throw new \Exception(
+                "Received error [$body] with status code [$statusCode] when retrieving user id."
+            );
+        }
+
+        return json_decode($response->getBody()->getContents())->userId;
+
     }
 
     public function userEmail($data, TokenCredentials $tokenCredentials)
