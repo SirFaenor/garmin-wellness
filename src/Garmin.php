@@ -11,8 +11,8 @@ use League\OAuth1\Client\Credentials\CredentialsInterface;
 class Garmin extends Server
 {
 
-    const API_URL = "https://connectapitest.garmin.com/";
-    const USER_API_URL = "http://gcsapitest.garmin.com/wellness-api/rest/";
+    const API_URL = "https://connectapi.garmin.com/";
+    const USER_API_URL = "https://healthapi.garmin.com/wellness-api/rest/";
 
     /**
      * Get the URL for retrieving temporary credentials.
@@ -31,7 +31,7 @@ class Garmin extends Server
      */
     public function urlAuthorization()
     {
-        return 'http://connecttest.garmin.com/oauthConfirm';
+        return 'https://connect.garmin.com/oauthConfirm';
     }
 
     /**
